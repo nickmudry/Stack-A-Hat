@@ -7,23 +7,23 @@ public class hatScript : MonoBehaviour
 
 	private bool hatStopped;
 	private bool dataSent;
-
-	private float delay;
-//	endless_prototype controllerScript;
+	
 	mainGame controllerScript;
 
+	private BoxCollider hatCollider;
 
 	// Use this for initialization
 	void Start () 
 	{
 		sceneController = GameObject.FindGameObjectWithTag("Scene Controller");
 		controllerScript = sceneController.GetComponent<mainGame>();
+
+		hatCollider = this.gameObject.GetComponent<BoxCollider>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -32,32 +32,28 @@ public class hatScript : MonoBehaviour
 		{
 			if(!dataSent)
 			{
-				if(this.gameObject.transform.position.y > controllerScript.mainCamera.transform.position.y - 4.0f)
-				{
-					Debug.Log ("Score++");
-					controllerScript.score++;
-					controllerScript.MoveCamera(this.gameObject.transform.localScale.y);
+				Debug.Log ("Score++");
+				controllerScript.score++;
+				controllerScript.MoveCamera(hatCollider.size.y/3.0f);
 
-					this.gameObject.rigidbody.isKinematic = true;
-					this.gameObject.transform.parent = GameObject.FindGameObjectWithTag("Head").transform; 
+				controllerScript.timeBetweenWaves = 0.8f;
 
-					dataSent = true;
-				}
-				else
-				{
-					Debug.Log("Health--");
-					controllerScript.health--;
-					this.gameObject.SetActive(false);
-					dataSent = true;
-				}
+				this.gameObject.rigidbody.isKinematic = true;
+				this.gameObject.transform.parent = GameObject.FindGameObjectWithTag("Head").transform; 
+
+				dataSent = true;
 			}
 		}
+
 		if(other.tag == "HatDestroyer")
 		{
-			Debug.Log("Health--");
-			controllerScript.health--;
-			this.gameObject.SetActive(false);
-			dataSent = true;
+			if(!dataSent)
+			{
+				Debug.Log("Health--");
+				controllerScript.health--;
+				this.gameObject.SetActive(false);
+				dataSent = true;
+			}
 		}
 	}
 }

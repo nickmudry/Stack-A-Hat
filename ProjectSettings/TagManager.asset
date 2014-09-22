@@ -4,11 +4,14 @@
 TagManager:
   tags:
   - Placeholder Hat
-  - Balloon
+  - HatDestroyer
   - Scene Controller
   - Head
   - Hat
-  - HatDestroyer
+  - Balloon0
+  - Balloon1
+  - Balloon2
+  - SideBound
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

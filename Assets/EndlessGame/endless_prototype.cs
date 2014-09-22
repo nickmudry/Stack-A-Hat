@@ -109,7 +109,6 @@ public class endless_prototype : MonoBehaviour
 				health--; 
 				timeUntilNextBalloon = Random.Range (0.4f, 1.5f);
 				balloonSpawned = false;
-
 			}
 			if(!balloonDir[spawnCounter] && balloonObject[spawnCounter].transform.position.x < -4.0f || balloonObject[spawnCounter].transform.position.y > 11.0f)
 			{
