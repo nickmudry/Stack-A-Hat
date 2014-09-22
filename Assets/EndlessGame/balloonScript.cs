@@ -1,27 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Balloon script.
+/// This handles collisions for the balloon as it enters and exit the camera's view.
+/// </summary>
+
 public class balloonScript : MonoBehaviour 
 {
 	public GameObject sceneController;
-	public bool inView;
-
-	private bool hatStopped;
-	private bool dataSent;
-	
 	mainGame controllerScript;
+
+	[System.NonSerialized]
+	public bool inView;	//public for mainGame.cs to access. This is primarily for left and right bounds to check if it's passed through one already
 
 	void Start () 
 	{	
 		sceneController = GameObject.FindGameObjectWithTag("Scene Controller");
 		controllerScript = sceneController.GetComponent<mainGame>();
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	}
 
+	/* I wanted to switch exit and enter really badly since it makes sense for it to set inView true as it enters and decrement score
+	 * as it leaves, but that means it enters and exits and does both at the same time.
+	 * I have another way to improve this, but I'll wait until we get it running on Android before I try implementing. 
+	 */
 	void OnTriggerExit(Collider other)
 	{
 		if(other.tag == "SideBound")

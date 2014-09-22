@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Outdated prototype script.
+/// 
+/// Not sure if I delete locally or do something in GitHub. 
+/// Will just let it take space until I find out.
+/// </summary>
+
 public class endless_prototype : MonoBehaviour 
 {
 	public GameObject mouseCursorObject;

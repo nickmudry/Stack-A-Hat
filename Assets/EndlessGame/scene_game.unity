@@ -271,7 +271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneController: {fileID: 1042573279}
-  inView: 0
 --- !u!54 &378459061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -345,7 +344,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7e3669cf306c78f48a1f9affe08eb0f9, type: 2}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -451,7 +450,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 627311731}
   - 33: {fileID: 627311734}
-  - 64: {fileID: 627311733}
   - 23: {fileID: 627311732}
   m_Layer: 0
   m_Name: Hat Sprite
@@ -492,19 +490,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &627311733
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 627311730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &627311734
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -521,7 +506,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 687209594}
   - 33: {fileID: 687209597}
-  - 64: {fileID: 687209596}
   - 23: {fileID: 687209595}
   m_Layer: 0
   m_Name: Hat Sprite
@@ -562,19 +546,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &687209596
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 687209593}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &687209597
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -858,7 +829,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1042573285}
-  - 33: {fileID: 1042573284}
   - 136: {fileID: 1042573283}
   - 23: {fileID: 1042573282}
   - 114: {fileID: 1042573281}
@@ -899,6 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2071825013}
+  gameOverObject: {fileID: 1631312799}
   mouseCursorObject: {fileID: 1042573279}
   balloonObject:
   - {fileID: 1831327389}
@@ -907,14 +878,14 @@ MonoBehaviour:
   balloonSpeed: []
   balloonLift: []
   balloonTouched: 
-  waveNumber: 0
-  waveSpawned: 0
-  timeBetweenWaves: 0
   placeholderHat:
   - {fileID: 1212558896}
   - {fileID: 196635856}
   - {fileID: 33793688}
   poppedHatObject: {fileID: 100000, guid: 131ec606120bc204a8c1ea56c16b20ea, type: 2}
+  waveNumber: 0
+  waveSpawned: 0
+  timeBetweenWaves: 0
   headObject: {fileID: 1571470547}
   score: 0
   health: 0
@@ -953,14 +924,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1042573284
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3300000, guid: 5f27b6c3140c1e8478145a708075b5f3,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1042573279}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1042573285
 Transform:
   m_ObjectHideFlags: 0
@@ -982,7 +945,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1211913770}
   - 33: {fileID: 1211913773}
-  - 64: {fileID: 1211913772}
   - 23: {fileID: 1211913771}
   m_Layer: 0
   m_Name: Hat Sprite
@@ -1023,19 +985,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &1211913772
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1211913769}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1211913773
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1159,7 +1108,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7e3669cf306c78f48a1f9affe08eb0f9, type: 2}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1547,11 +1496,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1631312799}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 1.02075911, z: -9.05329704}
-  m_LocalScale: {x: -.779437065, y: .96971333, z: -1.54592097}
+  m_LocalPosition: {x: 0, y: .0207591057, z: .946702957}
+  m_LocalScale: {x: -.651579559, y: .96971333, z: -1.54592097}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 2071825018}
+  m_RootOrder: 4
 --- !u!1 &1687909561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,7 +1670,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneController: {fileID: 1042573279}
-  inView: 0
 --- !u!54 &1831327395
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1964,7 +1912,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneController: {fileID: 1042573279}
-  inView: 0
 --- !u!54 &2008927537
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2066,5 +2013,6 @@ Transform:
   - {fileID: 399249413}
   - {fileID: 1979465669}
   - {fileID: 1955039200}
+  - {fileID: 1631312803}
   m_Father: {fileID: 0}
   m_RootOrder: 1
