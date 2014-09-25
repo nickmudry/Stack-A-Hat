@@ -33,6 +33,9 @@ public class mainGame : MonoBehaviour
 	//Floodsicle
 	public GameObject headObject;
 
+    //audio variables
+    public GameObject SFX_balPop;
+
 	//Number of hats and misses left
 	public int score;
 	public int health;
@@ -102,7 +105,7 @@ public class mainGame : MonoBehaviour
 				gameOver = true;	//You dead
 			}
 
-			if(score > 1)
+			if(score >= 1)
 			{
 	            SwayHead();
 	        }
@@ -232,6 +235,8 @@ public class mainGame : MonoBehaviour
 		//deactive current balloon + make instance of hat by itself
 		balloonObject[_num].SetActive(false);
 		Instantiate(poppedHatObject, placeholderHat[_num].transform.position, placeholderHat[_num].transform.rotation);
+
+        SFX_balPop.audio.Play(); // plays the pop noise on the balPop GameObject
 
 		timeBetweenWaves = 0.8f;
 		waveSpawned = false;

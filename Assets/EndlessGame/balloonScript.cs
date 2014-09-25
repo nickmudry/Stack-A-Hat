@@ -11,6 +11,9 @@ public class balloonScript : MonoBehaviour
 	public GameObject sceneController;
 	mainGame controllerScript;
 
+    //audio variables
+    public GameObject SFX_balRocket;
+
 	[System.NonSerialized]
 	public bool inView;	//public for mainGame.cs to access. This is primarily for left and right bounds to check if it's passed through one already
 
@@ -49,6 +52,7 @@ public class balloonScript : MonoBehaviour
 		{
 			if(inView)
 			{
+                SFX_balRocket.audio.Play(); //plays the fizzle from missing a hat
 				Debug.Log("Health--");
 				controllerScript.health--;
 				controllerScript.waveSpawned = false;

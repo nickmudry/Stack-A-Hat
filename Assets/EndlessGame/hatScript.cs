@@ -29,6 +29,7 @@ public class hatScript : MonoBehaviour
 		{
 			if(!hatStopped)
 			{
+                audio.Play();
 				Debug.Log ("Score++");
 				controllerScript.score++;
 
