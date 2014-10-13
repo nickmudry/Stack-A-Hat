@@ -155,8 +155,8 @@ public class mainGame : MonoBehaviour
 		//Chance to spawn from the left side...
 		if(Random.Range (0.0f, 2.0f) <= 1.0f)
 	 	{
-			balloonObject[0].transform.position = new Vector3(Random.Range (-8.0f, -5.1f), 
-                                     							Random.Range (0.5f, 3.0f) + mainCamera.transform.position.y - 1.0f,
+			balloonObject[0].transform.position = new Vector3(Random.Range (-7.0f, -5.1f), 
+                                     							Random.Range (1.5f, 3.0f) + mainCamera.transform.position.y - 1.0f,
 			                                                     0);
 
 			balloonSpeed[0] = Random.Range (0.8f, 1.2f) * score*0.25f + 2.0f;
@@ -164,8 +164,8 @@ public class mainGame : MonoBehaviour
 		//...or right side
 		else
 		{
-			balloonObject[0].transform.position = new Vector3(Random.Range (5.1f, 8.0f), 
-		                                                	  Random.Range (0.5f, 3.0f) + mainCamera.transform.position.y - 1.0f,
+			balloonObject[0].transform.position = new Vector3(Random.Range (5.1f, 7.0f), 
+		                                                	  Random.Range (1.5f, 3.0f) + mainCamera.transform.position.y - 1.0f,
                                      							0);
 
 			balloonSpeed[0] = Random.Range (0.8f, 1.2f) * -score*0.25f - 2.0f;
@@ -174,7 +174,7 @@ public class mainGame : MonoBehaviour
 		//balloons goes up up
 		balloonLift[0] = Random.Range (0, .5f)*score*0.5f;
 		//Set time between waves so it doesn't keep spawning 
-		timeBetweenWaves = 0.8f;  
+		timeBetweenWaves = 0.5f;  
 	}
 
 	void SwayHead()
