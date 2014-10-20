@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 54316c015daa52d4c8dbe16720daf46f
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Balloon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
