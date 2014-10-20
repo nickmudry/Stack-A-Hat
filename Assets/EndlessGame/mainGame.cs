@@ -12,29 +12,19 @@ public class mainGame : MonoBehaviour
 	public GameObject mainCamera;
 	public GameObject gameOverObject;
 
-	//Placeholder + testing purposes; controls using mouse
-	public GameObject mouseCursorObject;
-
 	//Here are balloons and everything associated with them
-	public GameObject [] balloonObject; 
-	public float [] balloonSpeed;	//horizontal movement
-	public float [] balloonLift; 	//vertical movement
-	public bool [] balloonTouched; 	//whether or not the balloon is currently being touched by finger/cursor
-
-	//Stores hat attached to each balloon and object that falls after balloon is popped
-	public GameObject [] placeholderHat;
-	public GameObject poppedHatObject;
-
+	public GameObject balloonObject; 
+	
 	//Wave variables
 	public int waveNumber;
 	public bool waveSpawned;
 	public float timeBetweenWaves;
+	public float spawnThreshold;
+
+	public int currentBalloons;
 	
 	//Floodsicle
 	public GameObject headObject;
-
-    //audio variables
-    public GameObject SFX_balPop;
 
 	//Number of hats and misses left
 	public int score;
@@ -75,29 +65,10 @@ public class mainGame : MonoBehaviour
 		{
 			headSwayDir = true; 
 		}        
-		
-		//Initialize the arrays of variables
-		balloonSpeed = new float[balloonObject.Length];
-		balloonLift = new float[balloonObject.Length]; 
-		balloonTouched = new bool[balloonObject.Length];
-		
-		for(int i = 0; i<balloonObject.Length; i++)
-		{
-			balloonObject[i].SetActive(false);
-			balloonSpeed[i] = 0.0f;
-			balloonLift[i] = 0.0f;
-
-			balloonSpeed[i] = 0.0f;
-			balloonLift[i] = 0.0f;
-			balloonTouched[i] = false;
-		}
 	}
 	
 	void Update () 
 	{	
-		//Main method of control
-		mouseCursorObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-
 		if(!gameOver)
 		{
 			if(health <= 0)
@@ -112,23 +83,13 @@ public class mainGame : MonoBehaviour
 
 			if(!waveSpawned)
 			{
-				timeBetweenWaves -= Time.deltaTime;	//lower counter while between waves
-			}
-			if(timeBetweenWaves <= 0.0f)
-			{
-				SpawnHat();	
-			}
+				timeBetweenWaves += Time.deltaTime;	//lower counter while between waves
 
-			//Check the three balloons
-			for(int i=0; i<balloonObject.Length; i++)
-			{
-				if(balloonObject[i])
+				if(timeBetweenWaves >= spawnThreshold)
 				{
-					MoveBalloon(i);
-				}
-				if(Input.GetMouseButtonDown(0) && balloonTouched[i])
-				{
-					PopBalloon(i);
+					SpawnHat();	
+					timeBetweenWaves = 0.0f;
+					waveSpawned = true;
 				}
 			}
 		}
@@ -136,45 +97,30 @@ public class mainGame : MonoBehaviour
 		{
 			GameOverUpdate();
 		}
+
+		if(currentBalloons <= 0)
+		{
+			waveSpawned = false;
+		}
     }
-
-	void MoveBalloon(int _num)
-	{
-		balloonObject[_num].transform.position = new Vector3(balloonObject[_num].transform.position.x + balloonSpeed[_num]*Time.deltaTime,
-		                                                     balloonObject[_num].transform.position.y + balloonLift[_num]*Time.deltaTime,
-		                                                     balloonObject[_num].transform.position.z);
-	}
-
+	
 	void SpawnHat()
 	{
+		currentBalloons++;
 		waveSpawned = true;
 
-		//Only one balloon for now; will have a way to pick between 1-3 balloons (increasing the chance the higher the score)
-		balloonObject[0].SetActive(true);
-
-		//Chance to spawn from the left side...
-		if(Random.Range (0.0f, 2.0f) <= 1.0f)
-	 	{
-			balloonObject[0].transform.position = new Vector3(Random.Range (-7.0f, -5.1f), 
-                                     							Random.Range (1.5f, 3.0f) + mainCamera.transform.position.y - 1.0f,
-			                                                     0);
-
-			balloonSpeed[0] = Random.Range (0.8f, 1.2f) * score*0.25f + 2.0f;
+		if(Random.Range (0.0f, 1.0f) <= 0.5f)
+		{
+			Instantiate(balloonObject, 
+		    	        new Vector3(Random.Range (-7.0f, -5.1f), Random.Range (1.5f, 3.0f) + mainCamera.transform.position.y - 1.0f, 0),
+		        	    balloonObject.transform.rotation);
 		}
-		//...or right side
 		else
 		{
-			balloonObject[0].transform.position = new Vector3(Random.Range (5.1f, 7.0f), 
-		                                                	  Random.Range (1.5f, 3.0f) + mainCamera.transform.position.y - 1.0f,
-                                     							0);
-
-			balloonSpeed[0] = Random.Range (0.8f, 1.2f) * -score*0.25f - 2.0f;
+			Instantiate(balloonObject, 
+			            new Vector3(Random.Range (5.1f, 7.0f), Random.Range (1.5f, 3.0f) + mainCamera.transform.position.y - 1.0f, 0),
+			            balloonObject.transform.rotation);
 		}
-
-		//balloons goes up up
-		balloonLift[0] = Random.Range (0, .5f)*score*0.5f;
-		//Set time between waves so it doesn't keep spawning 
-		timeBetweenWaves = 0.5f;  
 	}
 
 	void SwayHead()
@@ -227,23 +173,7 @@ public class mainGame : MonoBehaviour
 
 		waveNumber++;
 	}
-
-	void PopBalloon(int _num)
-	{
-		balloonTouched[_num] = false;
-
-		//deactive current balloon + make instance of hat by itself
-		balloonObject[_num].SetActive(false);
-		Instantiate(poppedHatObject, placeholderHat[_num].transform.position, placeholderHat[_num].transform.rotation);
-
-        SFX_balPop.audio.Play(); // plays the pop noise on the balPop GameObject
-
-		timeBetweenWaves = 0.8f;
-		waveSpawned = false;
-
-		balloonObject[_num].GetComponent<balloonScript>().inView = false;	//tell script attached to balloon the balloon is no longer "in view"
-	}
-
+	
 	void GameOverUpdate()
 	{
 		//Move camera slowly to head
@@ -270,38 +200,6 @@ public class mainGame : MonoBehaviour
 		if(gameOverTimer >= score/2 && Input.anyKey)
 		{
 			Application.LoadLevel(Application.loadedLevel);
-		}
-	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		//Only reason I'm using tags for this is so that it doesn't take up too much of a toll resource-wise
-		if(other.tag == "Balloon0")
-		{
-			balloonTouched[0] = true;
-		}
-		if(other.tag == "Balloon1")
-		{
-			balloonTouched[1] = true;
-		}
-		if(other.tag == "Balloon2")
-		{
-			balloonTouched[2] = true;
-		}
-	}
-	void OnTriggerExit(Collider other)
-	{
-		if(other.tag == "Balloon0")
-		{
-			balloonTouched[0] = false;
-		}
-		if(other.tag == "Balloon1")
-		{
-			balloonTouched[1] = false;
-		}		
-		if(other.tag == "Balloon2")
-		{
-			balloonTouched[2] = false;
 		}
 	}
 

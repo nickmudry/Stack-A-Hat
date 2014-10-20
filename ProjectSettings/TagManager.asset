@@ -8,10 +8,15 @@ TagManager:
   - Scene Controller
   - Head
   - Hat
-  - Balloon0
-  - Balloon1
-  - Balloon2
+  - Balloon
+  - Inactive Hat
+  - 
   - SideBound
+  - Sound Controller
+  - 
+  - 
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
