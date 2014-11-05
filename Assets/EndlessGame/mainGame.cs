@@ -14,7 +14,7 @@ public class mainGame : MonoBehaviour
 
 	//Here are balloons and everything associated with them
 	public GameObject balloonObject; 
-	
+		
 	//Wave variables
 	public int waveNumber;
 	public bool waveSpawned;
@@ -164,15 +164,6 @@ public class mainGame : MonoBehaviour
         }
     }
 
-	//Function for hatScript to call each time hat is added on
-	public void MoveCamera(float _hatHeight)
-	{
-		iTween.MoveTo(mainCamera, new Vector3(mainCamera.transform.position.x,
-		                                          mainCamera.transform.position.y + _hatHeight,
-		                                          mainCamera.transform.position.z), 1.0f);
-
-		waveNumber++;
-	}
 	
 	void GameOverUpdate()
 	{
@@ -214,4 +205,22 @@ public class mainGame : MonoBehaviour
 		GUI.TextField( new Rect(0, 20, 75, 20), "Height: " + (mainCamera.transform.position.y * 0.8f - 0.8f) + "ft.");	//Will have a way to actually track height instead of just camera height
 	}
 
+	//Function for hatScript to call each time hat is added on
+	public void MoveCamera(float _hatHeight)
+	{
+		iTween.MoveTo(mainCamera, new Vector3(mainCamera.transform.position.x,
+		                                      mainCamera.transform.position.y + _hatHeight,
+		                                      mainCamera.transform.position.z), 1.0f);
+		
+		waveNumber++;
+	}
+
+	public void ChangeHealth(int _amount)
+	{
+		health += _amount;
+	}
+	public void IncreaseScore(int _amount)
+	{
+		score += _amount;
+	}
 }
