@@ -9,7 +9,6 @@ using System.Collections;
 
 public class hatScript : MonoBehaviour 
 {
-	private GameObject SFX_balRocket;
 
 	public bool hatActive;	//once on, stop doing stuff to the hat
 	private BoxCollider2D hatCollider;	//this is for future-proofing for when we add more hats with different colliders
@@ -18,7 +17,6 @@ public class hatScript : MonoBehaviour
 
 	void Awake () 
 	{
-		SFX_balRocket = GameObject.FindGameObjectWithTag("Sound Controller");
 		controllerScript = GameObject.FindGameObjectWithTag("Scene Controller").GetComponent<mainGame>();
 
 		hatCollider = this.gameObject.GetComponent<BoxCollider2D>();
@@ -61,7 +59,6 @@ public class hatScript : MonoBehaviour
 			//What happens if it's still attached to the balloon
 			this.transform.parent.gameObject.SetActive(false);
 
-			SFX_balRocket.audio.Play(); //plays the fizzle from missing a hat
 			controllerScript.waveSpawned = false;
 		} 	
 		else if(this.tag != "Inactive Hat")
